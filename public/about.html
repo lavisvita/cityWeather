@@ -1,0 +1,12 @@
+<h1>About</h1>
+<div ng-controller='aboutCtrl'>
+    <ul class="nav nav-pills">
+        <li ng-repeat='(key, value) in links'>
+            <a href="#/{{key}}">{{value}}</a>
+        </li>
+    </ul>
+    <div>
+        <span>Для редактирования кликните на текст</span>
+        <p contentEditable="true">{{about.about}}</p>
+    </div>
+</div>

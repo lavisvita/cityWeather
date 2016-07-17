@@ -1,0 +1,25 @@
+<h1>Home</h1>
+<div ng-controller='homeCtrl'>
+    <ul class="nav nav-pills">
+        <li ng-repeat='(key, value) in links'>
+            <a href="#/{{key}}">{{value}}</a>
+        </li>
+    </ul>
+    <div>
+    {{Today.date}}
+        <div ng-repeat='data in citiesList'>
+            <span ng-repeat="town in data.town">
+                {{town.name}}
+                {{town.minTemp}}
+                {{town.maxTemp}}
+                {{town.clouds}}
+            </span>
+            <a href="" ng-click="deleteCity(data.id);">X</a>
+        </div>
+    </div>
+    <div>
+        <input type="text" ng-model="city" placeholder="type name of city">
+        <button ng-click="addCity(city);" >add City</button>
+    </div>
+
+</div>

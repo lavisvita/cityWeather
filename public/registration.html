@@ -1,0 +1,54 @@
+<h1>Registration</h1>
+<div class="row" ng-controller="registrationCtrl">
+    <ul class="nav nav-pills">
+        <li ng-repeat='(key, value) in links'>
+            <a href="#/{{key}}">{{value}}</a>
+        </li>
+    </ul>
+    <div class="col-lg-12">
+        <h3>Registration</h3>
+    </div>
+    <div class="col-lg-12">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-lg-4">
+                    <input id="inputLogin" type="text" ng-model="login" placeholder="Login" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-4">
+                    <input id="inputPassword" type="password" ng-model="password" placeholder="Password" class="form-control" >
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-4">
+                    <input id="inputEmail" type="password" ng-model="email" placeholder="email" class="form-control" >
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-4">
+                    <button type="submit" class="btn btn-primary" ng-click="regNow(login, password, email)">Зарегистрироваться</button>
+                </div>
+            </div>
+        </form>
+        <div ng-show="visible">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="close()" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">MYour reg data</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>login: {{login}}</p>
+                        <p>Password: {{password}}</p>
+                        <p>Email: {{email}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="close()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
