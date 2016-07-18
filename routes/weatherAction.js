@@ -8,14 +8,16 @@ let express = require('express'),
     fs = require('fs');
 
 router.post('/addDefault', (req, res)=>{
-    let cityList = [{ title: 'Moscow' }, {title:'Petersburg'}];
-    for(let key in cityList){
-        let city = new Cities(cityList[key]);
-        city.save(function (err, cities) {
-            if (err) return err;
-        });
-    }
     Cities.find({}, function(err, data){
+        if(data.length == 0){
+            let cityList = [{ title: 'Moscow' }, {title:'Petersburg'}];
+            for(let key in cityList){
+                let city = new Cities(cityList[key]);
+                city.save(function (err, cities) {
+                    if (err) return err;
+                });
+            }
+        }
         res.send(data);
     });
 });

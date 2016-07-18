@@ -51,7 +51,8 @@ angular.module('app')
         let getCities = $http.get('/getCities', {cache: true});
         getCities.then(function successCallback(response) {
             let arr = response.data;
-            if(response.data == ''){
+            console.log(response.data);
+            if(arr.length <= 0){
                 $scope.addDefaultCities();
             }else{
                 for(let key in arr){
