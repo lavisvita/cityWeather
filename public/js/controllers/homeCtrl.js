@@ -6,6 +6,19 @@ angular.module('app')
         $scope.city = '';
         let countCities = [];
 
+        $scope.addDefaultCities = ()=>{
+            $scope.citiesList = [];
+            countCities = [];
+            let delCity = $http.post('/addDefault');
+            delCity.then(function successCallback(response) {
+                let arr = response.data;
+                for(let key in arr){
+                    countCities.push({id: arr[key]._id, city: arr[key].title});
+                }
+                callback(countCities);
+            });
+        };
+
         $scope.deleteCity = (id)=>{
             $scope.citiesList = [];
             countCities = [];
@@ -38,10 +51,15 @@ angular.module('app')
         let getCities = $http.get('/getCities', {cache: true});
         getCities.then(function successCallback(response) {
             let arr = response.data;
-            for(let key in arr){
-                countCities.push({id: arr[key]._id, city: arr[key].title});
+            if(response.data == ''){
+                $scope.addDefaultCities();
+            }else{
+                for(let key in arr){
+                    countCities.push({id: arr[key]._id, city: arr[key].title});
+                }
+                callback(countCities);
             }
-            callback(countCities);
+
         });
         function callback(...args){
             for(let key in args){

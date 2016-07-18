@@ -7,7 +7,20 @@ let express = require('express'),
     path = require('path'),
     fs = require('fs');
 
-router.get('/weather/:town', function(req, res){
+router.post('/addDefault', (req, res)=>{
+    let cityList = [{ title: 'Moscow' }, {title:'Petersburg'}];
+    for(let key in cityList){
+        let city = new Cities(cityList[key]);
+        city.save(function (err, cities) {
+            if (err) return err;
+        });
+    }
+    Cities.find({}, function(err, data){
+        res.send(data);
+    });
+});
+
+router.get('/weather/:town', (req, res)=>{
     console.log(req.params.town);
         request({
             uri: 'http://api.openweathermap.org/data/2.5/weather?q=' + req.params.town + '&mode=JSON&lang=ru&APPID=772f561ff416a16cc96120c1c43edd70',
@@ -59,7 +72,7 @@ router.get('/getCities',function(req, res){
 router.post('/saveCity',function(req, res){
     let city = new Cities({ title: req.body.title });
     city.save(function (err, cities) {
-        if (err) return handleError(err);
+        if (err) return err;
         Cities.find({}, function(err, data){
             res.send(data);
         });
